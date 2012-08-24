@@ -6,7 +6,5 @@ main: org.bongomice.rotate.RotatePlugin
 
 commands:
     rotate:
-        description: Rotate Minecraft stairs, slabs, rails, pistons & wood and change paintings.
+        description: Rotate those pesky Minecraft blocks.
         usage: /rotate tool|reset
-        permission: rotate.tool
-        permission-message: You do not have the permission to use Rotate.

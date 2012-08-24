@@ -1,6 +1,10 @@
 package org.bongomice.rotate;
 
+import org.bukkit.Location;
 import org.bukkit.block.Block;
+import org.bukkit.block.Chest;
+import org.bukkit.craftbukkit.block.CraftBlock;
+import org.bukkit.craftbukkit.block.CraftChest;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -43,6 +47,7 @@ class RotateBlock implements Listener {
      if (RotateUtil.getUserTool(player.getPlayerListName()) != toolID) {
          return;
      }
+	 player.sendMessage(String.valueOf(blockData));
 
      
      if (!RotateUtil.isValidTarget(blockID)) {
@@ -101,7 +106,20 @@ class RotateBlock implements Listener {
                 
              }
              break;
-             
+			 
+		 case 54: if("Large chest".equalsIgnoreCase(new CraftChest(block).getInventory().getName())){
+					switch(blockData){
+						case 2: blockData++;
+							break;
+						case 3: blockData--;
+							break;
+						case 4: blockData++;
+							break;
+						case 5: blockData--;
+					}
+					break;
+				 }
+		 case 130:
          case 23:
          case 61:
          case 62:
@@ -176,11 +194,29 @@ class RotateBlock implements Listener {
                 
              }
              break;
+		 case 86:
+		 case 91:
+			 if (click == Action.LEFT_CLICK_BLOCK) {
+                
+                if (blockData < 3) { blockData++; }
+                else if (blockData == 3) { blockData = 0; }
+                else { return; }
+                
+             } else if (click == Action.RIGHT_CLICK_BLOCK){
+                
+                if (blockData > 0) { blockData--; }
+                else if (blockData == 0) { blockData = 5; }
+                else { return; }
+                
+             }
+             break;
               
      }
      
+	 
      block.setData((byte) blockData);
      
   }
 
+  
 }

@@ -20,7 +20,7 @@ public class RotatePlugin extends JavaPlugin {
         
         if (guard != null && guard instanceof WorldGuardPlugin) {
             WorldGuard = (WorldGuardPlugin)guard;
-        }
+		}
     
     }
  

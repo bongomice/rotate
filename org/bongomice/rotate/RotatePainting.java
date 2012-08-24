@@ -2,6 +2,7 @@
 package org.bongomice.rotate;
 
 import org.bukkit.Art;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Painting;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -22,14 +23,26 @@ public class RotatePainting implements Listener {
 		Player player =  event.getPlayer();
 		Painting painting;		
 		int toolID;
+		Block block;
 
 		 try {
 			toolID = player.getItemInHand().getTypeId();
-			painting =  (Painting) event.getRightClicked();			
+			painting =  (Painting) event.getRightClicked();
+			block = painting.getLocation().getBlock();
 		} catch(NullPointerException e) {		
 			return; 
 		}
-
+		 
+		if (RotatePlugin.WorldGuard != null) {
+			try {
+				if (!RotatePlugin.WorldGuard.canBuild(player, block)) {
+					return;
+				}
+			} catch (NullPointerException e) {
+				return;
+			}
+		}
+		
 		if (RotateUtil.getUserTool(player.getPlayerListName()) != toolID) {
 			return;
 		}
@@ -103,64 +116,6 @@ public class RotatePainting implements Listener {
 	   }
 	   
 	   painting.setArt(art);
-	   
-       
-       /*switch(art){
-           
-            case KEBAB: painting.setArt(Art.AZTEC);
-                break;
-            case AZTEC: painting.setArt(Art.ALBAN);
-                break;
-            case ALBAN: painting.setArt(Art.AZTEC2);
-                break;
-            case AZTEC2: painting.setArt(Art.BOMB);
-                break;
-            case BOMB: painting.setArt(Art.PLANT);
-                break;
-            case PLANT: painting.setArt(Art.WASTELAND);
-                break;
-            case WASTELAND: painting.setArt(Art.POOL);
-                break;
-            case POOL: painting.setArt(Art.COURBET);
-                break;
-            case COURBET: painting.setArt(Art.SEA);
-                break;
-            case SEA: painting.setArt(Art.SUNSET);
-                break;
-            case SUNSET: painting.setArt(Art.CREEBET);
-                break;
-            case CREEBET: painting.setArt(Art.WANDERER);
-                break;
-            case WANDERER: painting.setArt(Art.GRAHAM);
-                break;
-            case GRAHAM: painting.setArt(Art.MATCH);
-                break;
-            case MATCH: painting.setArt(Art.BUST);
-                break;
-            case BUST: painting.setArt(Art.STAGE);
-                break;
-            case STAGE: painting.setArt(Art.VOID);
-                break;
-            case VOID: painting.setArt(Art.SKULL_AND_ROSES );
-                break;
-            case SKULL_AND_ROSES: painting.setArt(Art.FIGHTERS);
-                break;
-            case FIGHTERS: painting.setArt(Art.POINTER);
-                break;
-            case POINTER: painting.setArt(Art.PIGSCENE);
-                break;
-            case PIGSCENE: painting.setArt(Art.BURNINGSKULL);
-                break;
-            case BURNINGSKULL: painting.setArt(Art.SKELETON);
-                break;
-            case SKELETON: painting.setArt(Art.DONKEYKONG);
-                break;
-            case DONKEYKONG: painting.setArt(Art.KEBAB);
-                break;
-            default:
-                return;
-    
-            }*/
     }
     
 }

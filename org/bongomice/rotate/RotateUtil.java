@@ -12,6 +12,7 @@ public class RotateUtil {
         271, 258, 275, 279, 286,  // Axes 
         270, 257, 277, 278, 285,  // Pickaxes
         280, 262                  // Sticks & Arrows
+			
     };
 
     static final int[] valid_targets = {
@@ -20,8 +21,10 @@ public class RotateUtil {
         33, 29,                                     // Pistons
         109, 108, 67, 53, 128, 114, 136, 135, 134,  // Stairs
         17,                                         // Wood            
-        323, 63,                                    // Sign
-        23, 61, 62                                  // Dispenser & Furnace
+        323, 63,                                    // Signs
+        23, 61, 62,                                 // Dispensers & Furnaces
+		130, 54,									// Enderchests & chest
+		86, 91										// Pumpkin & Jack'O'Lantern
     };
 
     public static boolean isValidTarget(int typeID) {
