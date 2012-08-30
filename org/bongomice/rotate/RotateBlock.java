@@ -47,8 +47,6 @@ class RotateBlock implements Listener {
      if (RotateUtil.getUserTool(player.getPlayerListName()) != toolID) {
          return;
      }
-	 player.sendMessage(String.valueOf(blockData));
-
      
      if (!RotateUtil.isValidTarget(blockID)) {
          return;
