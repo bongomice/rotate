@@ -9,10 +9,10 @@ public class RotateUtil {
     
     static final int[] valid_tools = {
         290, 291, 292, 293, 294,  // Hoes
-        271, 258, 275, 279, 286,  // Axes 
-        270, 257, 277, 278, 285,  // Pickaxes
+        271, 275, 258, 286, 279,  // Axes
+        270, 274, 257, 278, 285,  // Pickaxes
+		269, 273, 256, 284, 277,  // Shovels
         280, 262                  // Sticks & Arrows
-			
     };
 
     static final int[] valid_targets = {
