@@ -1,0 +1,5 @@
+# Configuration for Rotate 1.3
+# Check the BukkitDev Page for Help
+# http://dev.bukkit.org/server-mods/rotate
+
+use-permissions: false
