@@ -5,10 +5,10 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 public class RotateLogout implements Listener {
-    
-    @EventHandler
-    public void ToolReset(PlayerQuitEvent event) {
-        RotateUtil.resetUserTool(event.getPlayer().getPlayerListName());
-    }
+	
+	@EventHandler
+	public void ToolReset(PlayerQuitEvent event) {
+		RotateUtil.resetUserTool(event.getPlayer().getPlayerListName());
+	}
 
 }
