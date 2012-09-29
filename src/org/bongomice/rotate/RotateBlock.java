@@ -1,9 +1,6 @@
 package org.bongomice.rotate;
 
-import org.bukkit.Location;
 import org.bukkit.block.Block;
-import org.bukkit.block.Chest;
-import org.bukkit.craftbukkit.block.CraftBlock;
 import org.bukkit.craftbukkit.block.CraftChest;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -44,13 +41,20 @@ class RotateBlock implements Listener {
 			return; 
 		}
 		
-		if (RotateUtil.getUserTool(player.getPlayerListName()) != toolID) {
+		if (RotateUtil.getUserTool(player.getPlayerListName()) != toolID
+                        && RotatePlugin.defaultToolID != toolID) {
 			return;
 		}
 		
 		if (!RotateUtil.isValidTarget(blockID)) {
 			return;
 		}
+                
+                if (RotateUtil.getUserTool(player.getPlayerListName()) != -1 && toolID == RotatePlugin.defaultToolID
+                        && RotateUtil.getUserTool(player.getPlayerListName()) != RotatePlugin.defaultToolID)
+                {
+                    return;
+                }
 		
 		event.setCancelled(true);
 		

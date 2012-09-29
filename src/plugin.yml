@@ -7,7 +7,7 @@ main: org.bongomice.rotate.RotatePlugin
 commands:
   rotate:
     description: Rotate those pesky Minecraft blocks.
-    usage: /rotate tool|reset
+    usage: /rotate tool|reset|getDefaultTool
 
 permissions:
   rotate.*:

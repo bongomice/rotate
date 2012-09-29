@@ -10,7 +10,8 @@ import org.bukkit.plugin.Plugin;
 enum RotateCommandArguments {
 	tool,
 	reset,
-	help
+	help,
+        getdefaulttool
 }
 
 public class RotateCommand implements CommandExecutor {
@@ -57,15 +58,27 @@ public class RotateCommand implements CommandExecutor {
 				RotateUtil.resetUserTool(player.getPlayerListName());
 				player.sendMessage(ChatColor.LIGHT_PURPLE + "Your Rotate tool has been reset.");
 				break;
-			
-			case help:
+                            
+                        case getdefaulttool:
+                                if (RotatePlugin.defaultToolID == -1) {
+                                        player.sendMessage(ChatColor.LIGHT_PURPLE + "There is no default Rotate tool.");
+                                        return true;
+                                }
+                                for (int i = 0; i < RotateUtil.valid_tools.length; i++) {
+                                        if (RotateUtil.valid_tools[i] == RotatePlugin.defaultToolID) {                                            
+                                                player.sendMessage(ChatColor.LIGHT_PURPLE + "The current default Rotate tool is the " + RotateUtil.tools_names[i] + ".");
+                                        }
+                                }                               
+                                break;
+			case help:                        
 			default:
 				String[] helpMessage = {
 					ChatColor.RED + "Rotate v1.3 - By BongoMice",
 					ChatColor.RED + "Used to rotate those pesky Minecraft blocks.",
 					ChatColor.RED + "Supports stairs, slabs, pistons, rails, paintings and logs.",
 					ChatColor.RED + "-> Use \"/rotate tool\" to enable Rotate on your current tool.",
-					ChatColor.RED + "-> Use \"/rotate reset\" to reset the Rotate tool."
+					ChatColor.RED + "-> Use \"/rotate reset\" to reset the Rotate tool.",
+                                        ChatColor.RED + "-> Use \"/rotate getDefaultTool\" to get the default Rotate tool."
 				};
 				
 				player.sendMessage(helpMessage);
