@@ -7,13 +7,17 @@ main: org.bongomice.rotate.RotatePlugin
 commands:
   rotate:
     description: Rotate those pesky Minecraft blocks.
-    usage: /rotate tool|reset|getDefaultTool
+    usage: /rotate tool|reset|getDefaultTool|setDefaultTool(op only)
 
 permissions:
   rotate.*:
     description: Gives access to the Rotate Tool & Command
     children:
       rotate.access: true
+      rotate.set-default-tool: true
   rotate.access:
     description: Gives access to the Rotate Tool & Command
     default: true
+  rotate.set-default-tool:
+    description: Let the player set the default Rotate tool in the config
+    default: op

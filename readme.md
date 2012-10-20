@@ -47,7 +47,7 @@ Gives access to the Rotate command and tools.
 -----
 
 # Changelog
-
++ **1.4** Added support for a default tool. Rotate can now save users tools.
 + **1.3** Added support for permissions and a config file.
 + **1.2** Plugin is available on BukkitDev. Fixed tools.
 + **1.1** First Bukkit forum release. Added support for chests and pumpkins.
