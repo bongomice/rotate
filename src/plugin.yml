@@ -1,5 +1,5 @@
 name: Rotate
-version: 1.3
+version: 1.4
 description: A plugin to help player rotate blocks.
 author: BongoMice
 main: org.bongomice.rotate.RotatePlugin
@@ -7,13 +7,17 @@ main: org.bongomice.rotate.RotatePlugin
 commands:
   rotate:
     description: Rotate those pesky Minecraft blocks.
-    usage: /rotate tool|reset
+    usage: /rotate tool|reset|getDefaultTool|setDefaultTool(op only)
 
 permissions:
   rotate.*:
     description: Gives access to the Rotate Tool & Command
     children:
       rotate.access: true
+      rotate.set-default-tool: true
   rotate.access:
     description: Gives access to the Rotate Tool & Command
     default: true
+  rotate.set-default-tool:
+    description: Lets the player set the default Rotate tool in the config in game by the /rotate setDefaultTool command.
+    default: op
