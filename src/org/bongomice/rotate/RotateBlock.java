@@ -1,9 +1,6 @@
 package org.bongomice.rotate;
 
-import org.bukkit.Location;
 import org.bukkit.block.Block;
-import org.bukkit.block.Chest;
-import org.bukkit.craftbukkit.block.CraftBlock;
 import org.bukkit.craftbukkit.block.CraftChest;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -12,7 +9,7 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 
 class RotateBlock implements Listener {
-
+	
 	@EventHandler
 	public void BlockInteracted(PlayerInteractEvent event) {
 	
@@ -35,16 +32,18 @@ class RotateBlock implements Listener {
 		}
 		
 		try {
-
+		
 			blockID = block.getTypeId();
 			toolID = player.getItemInHand().getTypeId();
 			blockData = block.getData();
 			
-		} catch(NullPointerException e){		
+		} catch(NullPointerException e) {		
 			return; 
 		}
 		
-		if (RotateUtil.getUserTool(player.getPlayerListName()) != toolID) {
+		if (RotateUtil.getUserTool(player.getPlayerListName()) != toolID
+				&& RotatePlugin.defaultToolID != toolID)
+		{
 			return;
 		}
 		
@@ -52,9 +51,19 @@ class RotateBlock implements Listener {
 			return;
 		}
 		
+		// To avoid player using 2 tools, it verify if the player hasn't a tool ID,
+		//		and if he has a tool ID defined, he can't use the default tool ID, excepted if his tool ID
+		//		is the same as the default tool ID
+		if (RotateUtil.getUserTool(player.getPlayerListName()) != -1 
+			&& toolID == RotatePlugin.defaultToolID
+			&& RotateUtil.getUserTool(player.getPlayerListName()) != RotatePlugin.defaultToolID)
+		{
+			return;
+		}
+		
 		event.setCancelled(true);
 		
-		switch (blockID){
+		switch (blockID) {
 			
 			case 44: 
 			case 126:
@@ -70,7 +79,7 @@ class RotateBlock implements Listener {
 					else if (blockData >= 8) { blockData -= 8; }
 					else { return; }
 					
-				} else if (click == Action.RIGHT_CLICK_BLOCK){
+				} else if (click == Action.RIGHT_CLICK_BLOCK) {
 					
 					if (blockData > 3) { blockData -= 4; }
 					else if (blockData <= 3) { blockData += 8; }
@@ -93,7 +102,7 @@ class RotateBlock implements Listener {
 					else if (blockData == 7) { blockData = 0; }
 					else { return; }
 					
-				} else if (click == Action.RIGHT_CLICK_BLOCK){
+				} else if (click == Action.RIGHT_CLICK_BLOCK) {
 					
 					if (blockData > 0) { blockData--; }
 					else if (blockData == 0) { blockData = 7; }
@@ -103,8 +112,8 @@ class RotateBlock implements Listener {
 				break;
 				
 			case 54: 
-				if("Large chest".equalsIgnoreCase(new CraftChest(block).getInventory().getName())){
-					switch(blockData){
+				if("Large chest".equalsIgnoreCase(new CraftChest(block).getInventory().getName())) {
+					switch(blockData) {
 						case 2: blockData++; break;
 						case 3: blockData--; break;
 						case 4: blockData++; break;
@@ -123,7 +132,7 @@ class RotateBlock implements Listener {
 					else if (blockData == 5) { blockData = 2; }
 					else { return; }
 					
-				} else if (click == Action.RIGHT_CLICK_BLOCK){
+				} else if (click == Action.RIGHT_CLICK_BLOCK) {
 					
 					if (blockData > 2) { blockData--; }
 					else if (blockData == 2) { blockData = 5; }
@@ -144,7 +153,7 @@ class RotateBlock implements Listener {
 					else if (blockData == 5) { blockData = 0; }
 					else { return; }
 					
-				} else if (click == Action.RIGHT_CLICK_BLOCK){
+				} else if (click == Action.RIGHT_CLICK_BLOCK) {
 					
 					if (blockData > 0) { blockData--; }
 					else if (blockData == 0) { blockData = 5; }
@@ -156,7 +165,7 @@ class RotateBlock implements Listener {
 			case 27:
 			case 28:
 			case 66: 
-				switch(blockData){
+				switch(blockData) {
 					case 0: 
 						blockData = 1;
 						break;
@@ -180,7 +189,7 @@ class RotateBlock implements Listener {
 					else if (blockData == 15) { blockData = 0; }
 					else { return; }
 					
-				} else if (click == Action.RIGHT_CLICK_BLOCK){
+				} else if (click == Action.RIGHT_CLICK_BLOCK) {
 					
 					if (blockData > 0) { blockData--; }
 					else if (blockData == 0) { blockData = 15; }
@@ -197,7 +206,7 @@ class RotateBlock implements Listener {
 					else if (blockData == 3) { blockData = 0; }
 					else { return; }
 					
-				} else if (click == Action.RIGHT_CLICK_BLOCK){
+				} else if (click == Action.RIGHT_CLICK_BLOCK) {
 					
 					if (blockData > 0) { blockData--; }
 					else if (blockData == 0) { blockData = 5; }
@@ -209,8 +218,8 @@ class RotateBlock implements Listener {
 			default:
 				return;
 		}
-	
+		
 		block.setData((byte) blockData);
 	}
-  
+	
 }
