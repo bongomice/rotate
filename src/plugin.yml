@@ -1,5 +1,5 @@
 name: Rotate
-version: 1.3
+version: 1.4
 description: A plugin to help player rotate blocks.
 author: BongoMice
 main: org.bongomice.rotate.RotatePlugin
@@ -19,5 +19,5 @@ permissions:
     description: Gives access to the Rotate Tool & Command
     default: true
   rotate.set-default-tool:
-    description: Let the player set the default Rotate tool in the config
+    description: Lets the player set the default Rotate tool in the config in game by the /rotate setDefaultTool command.
     default: op
