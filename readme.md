@@ -10,10 +10,10 @@
 + **Logs**
 + **Pistons**
 + **Furnaces**
-+ **Dispensers**
++ **Dispensers and Dropers**
 + **Paintings**
 + **Pumpkins and Jack 'o Lanterns**
-+ **Chests, Ender Chests and Double Chests**
++ **Chests, Trapped Chests, Ender Chests and Double Chests**
 
 Using Rotate couldn't be easier. Once you've downloaded the file and placed it in your plugins folder, simply reload your plugins (or restart your server) and then, while holding a tool (hoe, axe, pickaxe, sword, stick or arrow) run the command. That will active Rotate on that tool. Then, it's just a matter of clicking on blocks to rotate them!
 
