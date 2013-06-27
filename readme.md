@@ -4,6 +4,8 @@
 **Rotate** is a very simple plugin, which enables you to rotate blocks in Minecraft. Ever had that annoying moment when your stairs got placed in the wrong direction, or logs going crazy? Rotate aims to solve that by giving you a tool to rotate and fix those blocks. To make things even sweeter, Rotate has WorldGuard compatibility, so don't worry about griefers turning all your blocks around. Here's the full list of blocks that are supported:
 
 + **Stairs**
++ **Heads**
++ **Rails**
 + **Slabs**
 + **Logs**
 + **Pistons**
@@ -100,6 +102,8 @@ Gives access to the **/rotate setDefaultTool** command. This permission is by de
 
 # Changelog
 
++ **1.5** Added support for heads and new 1.4 and 1.5 blocks such as activator rails and trapped chests, and the new painting.
+Rotated blocks are now seen as broken and replaced blocks for compatibility with block recording plugins like SWatchdog.
 + **1.4** Added support for a default tool. Rotate can now save users' tools.
 + **1.3** Added support for permissions and a config file.
 + **1.2** Plugin is available on BukkitDev. Fixed tools.

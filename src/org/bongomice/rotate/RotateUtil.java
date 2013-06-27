@@ -3,6 +3,8 @@ package org.bongomice.rotate;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+import org.bukkit.block.Block;
+import org.bukkit.entity.Player;
 
 public class RotateUtil {
 
@@ -26,15 +28,17 @@ public class RotateUtil {
 	};
 
 	static final int[] valid_targets = {
-		44, 126,                                    // Slabs
-		66, 28, 27,                                 // Rails
-		33, 29,                                     // Pistons
-		109, 108, 67, 53, 128, 114, 136, 135, 134,  // Stairs
-		17,                                         // Wood
-		323, 63,                                    // Signs
-		23, 61, 62,                                 // Dispensers & Furnaces
-		130, 54,                                    // Enderchests & chest
-		86, 91                                      // Pumpkin & Jack'O'Lantern
+		44, 126,			// Slabs
+		66, 28, 27, 157,		// Rails
+		33, 29,				// Pistons
+		109, 108, 67, 53, 128,		// Stairs
+		114, 136, 135, 134, 156,	// Stairs
+		17,				// Wood
+		323, 63,			// Signs
+		23, 61, 62, 158,		// Dispensers, Dropers & Furnaces
+		130, 54, 146,			// Enderchests & Chests
+		86, 91,				// Pumpkins & Jack'O'Lanterns
+		144				// Heads
 	};
 
 	public static boolean isValidTarget(int typeID) {
@@ -107,5 +111,42 @@ public class RotateUtil {
 			//I found this here: (http://forums.bukkit.org/threads/reading-saving-hashmaps-from-a-yml-file.88758/)
 		}
 		RotatePlugin.rotatePlugin.saveConfig();
+	}
+
+	public static boolean verify(Player player, Block block, int toolID){
+
+		if (RotatePlugin.WorldGuard != null) {
+			try {
+				if (!RotatePlugin.WorldGuard.canBuild(player, block)) {
+					return false;
+				}
+			} catch (NullPointerException e) {
+				return false;
+			}
+		}
+
+		if (RotatePlugin.usePermissions && !player.hasPermission("rotate.access")){
+			return false;
+		}
+
+		if (RotateUtil.getUserTool(player.getPlayerListName()) != toolID
+			&& RotatePlugin.defaultToolID != toolID) {
+			return false;
+		}
+
+
+		/* To avoid player using 2 tools (default and player's defined item), it checks if the player has not already a tool ID defined,
+		 * and if he has a tool ID defined, he can't use the default tool ID,*
+		 * excepted if his tool ID is the same as the default tool ID
+		 */
+		if (RotateUtil.getUserTool(player.getPlayerListName()) != -1
+			&& toolID == RotatePlugin.defaultToolID
+			&& RotateUtil.getUserTool(player.getPlayerListName()) != RotatePlugin.defaultToolID)
+		{
+			return false;
+		}
+
+		return true;
+
 	}
 }

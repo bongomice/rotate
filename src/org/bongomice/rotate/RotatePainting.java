@@ -1,13 +1,17 @@
 package org.bongomice.rotate;
 
 import org.bukkit.Art;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Painting;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.painting.PaintingBreakByEntityEvent;
+import org.bukkit.event.painting.PaintingPlaceEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 
 public class RotatePainting implements Listener {
@@ -23,41 +27,23 @@ public class RotatePainting implements Listener {
 		Painting painting;
 		int toolID;
 		Block block;
+		Block attachedBlock;
 
-		 try {
+		try {
 			toolID = player.getItemInHand().getTypeId();
 			painting =  (Painting) event.getRightClicked();
 			block = painting.getLocation().getBlock();
+			attachedBlock = getAttachedBlock(painting);
 		} catch(NullPointerException e) {
 			return;
 		}
 
-		if (RotatePlugin.WorldGuard != null) {
-			try {
-				if (!RotatePlugin.WorldGuard.canBuild(player, block)) {
-					return;
-				}
-			} catch (NullPointerException e) {
-				return;
-			}
-		}
-
-		if (RotateUtil.getUserTool(player.getPlayerListName()) != toolID
-			&& RotatePlugin.defaultToolID != toolID) {
+		if (!RotateUtil.verify(player, block, toolID)){
 			return;
 		}
 
-		// To avoid player using 2 tools (default and player's defined item), it verify if the player hasn't already a tool ID defined,
-		//	and if he has a tool ID defined, he can't use the default tool ID,
-		//	excepted if his tool ID is the same as the default tool ID
-		if (RotateUtil.getUserTool(player.getPlayerListName()) != -1
-			&& toolID == RotatePlugin.defaultToolID
-			&& RotateUtil.getUserTool(player.getPlayerListName()) != RotatePlugin.defaultToolID)
-		{
-			return;
-		}
+		Bukkit.getServer().getPluginManager().callEvent(new PaintingPlaceEvent(painting, player, attachedBlock, painting.getFacing()));
 
-		event.setCancelled(true);
 		rotatePainting(painting, Action.RIGHT_CLICK_BLOCK);
 	}
 
@@ -71,19 +57,24 @@ public class RotatePainting implements Listener {
 		Player player =  (Player)event.getRemover();
 		int toolID;
 		Painting painting;
+		Block block;
+		Block attachedBlock;
 
 		try {
 			toolID = player.getItemInHand().getTypeId();
 			painting = event.getPainting();
+			block = painting.getLocation().getBlock();
+			attachedBlock = getAttachedBlock(painting);
 		} catch(NullPointerException e) {
 			return;
 		}
 
-		if (RotateUtil.getUserTool(player.getPlayerListName()) != toolID) {
+		if (!RotateUtil.verify(player, block, toolID)){
 			return;
 		}
 
-		event.setCancelled(true);
+		Bukkit.getServer().getPluginManager().callEvent(new PaintingPlaceEvent(painting, player, attachedBlock, painting.getFacing()));
+
 		rotatePainting(painting, Action.LEFT_CLICK_BLOCK);
 	}
 
@@ -102,13 +93,37 @@ public class RotatePainting implements Listener {
 			i++;
 		}
 
+		int max;
+
+		if (RotatePlugin.Version <= 1.4){ max = 25; }
+		else { max = 24; }
+
 		if (click ==  Action.RIGHT_CLICK_BLOCK) {
-			if (i == 24) { art = Art.KEBAB; } else { art = Art.values()[i+1]; }
+			if (i == max) { art = Art.KEBAB; } else { art = Art.values()[i+1]; }
 		} else {
 			if (i == 0) { art = Art.DONKEYKONG; } else { art = Art.values()[i-1]; }
 		}
 
 		painting.setArt(art);
+	}
+
+	public Block getAttachedBlock (Painting painting){
+
+		Block attachedBlock;
+		BlockFace attachedFace = painting.getAttachedFace();
+
+		int X = painting.getLocation().getBlockX();
+		int Y = painting.getLocation().getBlockY();
+		int Z = painting.getLocation().getBlockZ();
+
+		X += attachedFace.getModX();
+		Y += attachedFace.getModY();
+		Z += attachedFace.getModZ();
+
+
+		attachedBlock = (new Location(painting.getWorld(), X, Y, Z)).getBlock();
+
+		return attachedBlock;
 	}
 
 }

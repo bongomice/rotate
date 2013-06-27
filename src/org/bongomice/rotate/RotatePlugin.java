@@ -10,6 +10,7 @@ public class RotatePlugin extends JavaPlugin {
 
 	public static WorldGuardPlugin WorldGuard = null;
 	public static RotatePlugin rotatePlugin = null;
+	public static float Version = 0;
 
 	public static boolean usePermissions = false;
 	public static int defaultToolID =  -1;
@@ -39,6 +40,7 @@ public class RotatePlugin extends JavaPlugin {
 	}
 
 	public void loadConfig() {
+
 		saveDefaultConfig();
 
 		savePlayersTools =  getConfig().getBoolean("save-players-tools");

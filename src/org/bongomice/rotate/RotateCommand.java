@@ -73,7 +73,7 @@ public class RotateCommand implements CommandExecutor {
 
 			case setdefaulttool:
 
-				if (!player.hasPermission("rotate.set-default-Tool")) {
+				if (RotatePlugin.usePermissions && !player.hasPermission("rotate.set-default-Tool")) {
 					player.sendMessage(ChatColor.RED + "You do not have permission to perform this command.");
 					return true;
 				}
@@ -101,9 +101,9 @@ public class RotateCommand implements CommandExecutor {
 			case help:
 			default:
 				String[] helpMessage = {
-					ChatColor.RED + "Rotate v1.4 - By BongoMice",
+					ChatColor.RED + "Rotate v1.5 - By BongoMice",
 					ChatColor.RED + "Used to rotate those pesky Minecraft blocks.",
-					ChatColor.RED + "Supports stairs, slabs, pistons, rails, paintings and logs.",
+					ChatColor.RED + "Supports stairs, heads, signs, dispensers, furnaces, slabs, pistons, rails, paintings, chests, pumpkins and logs.",
 					ChatColor.RED + "-> Use \"/rotate tool\" to enable Rotate on your current tool.",
 					ChatColor.RED + "-> Use \"/rotate reset\" to reset the Rotate tool.",
 					ChatColor.RED + "-> Use \"/rotate getDefaultTool\" to get the default Rotate tool.",
