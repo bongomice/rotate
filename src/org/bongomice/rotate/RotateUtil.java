@@ -26,20 +26,25 @@ public class RotateUtil {
 		"Iron Sword", "Wooden Sword", "Stone Sword", "Diamond Sword", "Golden sword",
 		"Stick", "Arrow"
 	};
+        
+        static boolean rotatable_painting;
 
-	static final int[] valid_targets = {
-		44, 126,			// Slabs
-		66, 28, 27, 157,		// Rails
-		33, 29,				// Pistons
-		109, 108, 67, 53, 128,		// Stairs
-		114, 136, 135, 134, 156,	// Stairs
-		17,				// Wood
-		323, 63,			// Signs
-		23, 61, 62, 158,		// Dispensers, Dropers & Furnaces
-		130, 54, 146,			// Enderchests & Chests
-		86, 91,				// Pumpkins & Jack'O'Lanterns
-		144				// Heads
-	};
+	/* 
+         * targets id:
+         * 44, 126,                                             // Slabs
+         * 66, 28, 27, 157,                                     // Rails
+         * 33, 29,                                              // Pistons
+         * 109, 108, 67, 53, 128, 114, 136, 135, 134, 156,	// Stairs
+         * 17,                                                  // Wood
+         * 323, 63,                                             // Signs
+         * 23, 61, 62, 158,                                     // Dispensers, Droppers & Furnaces
+         * 130, 54, 146,                                        // Enderchests & Chests
+         * 86, 91,                                              // Pumpkins & Jack'O'Lanterns
+         * 144                                                  // Heads
+         * 
+         */
+        
+        static int[] valid_targets;
 
 	public static boolean isValidTarget(int typeID) {
 

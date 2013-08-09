@@ -22,6 +22,10 @@ public class RotatePainting implements Listener {
 		if (!(event.getRightClicked() instanceof Painting)) {
 			return;
 		}
+                
+                if (!RotateUtil.rotatable_painting) {
+                    return;
+                }
 
 		Player player =  event.getPlayer();
 		Painting painting;
@@ -53,6 +57,10 @@ public class RotatePainting implements Listener {
 		if (!(event.getRemover() instanceof Player)) {
 			return;
 		}
+                
+                if (!RotateUtil.rotatable_painting) {
+                    return;
+                }
 
 		Player player =  (Player)event.getRemover();
 		int toolID;

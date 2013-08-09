@@ -1,5 +1,5 @@
 name: Rotate
-version: 1.5
+version: 1.6
 description: A plugin to help player rotate blocks.
 author: BongoMice
 main: org.bongomice.rotate.RotatePlugin

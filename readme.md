@@ -10,7 +10,7 @@
 + **Logs**
 + **Pistons**
 + **Furnaces**
-+ **Dispensers and Dropers**
++ **Dispensers and Droppers**
 + **Paintings**
 + **Pumpkins and Jack 'o Lanterns**
 + **Chests, Trapped Chests, Ender Chests and Double Chests**
@@ -19,7 +19,8 @@ Using Rotate couldn't be easier. Once you've downloaded the file and placed it i
 
 Note that by default permissions are disabled. If you want to use permissions, set it to *true* in the Rotate config file (generated when you first run the plugin). You can see what permissions are available below.
 You can also choose to save players' tools or not: if you don't want your players to type each time they connect the **/rotate tool** command, set ``save-players-tools`` to *true* in the ``config.yml``, otherwise, set it to *false*.
-Finally, you're able to set a default tool in the config. See **Valids Tools** to get a list of IDs. Set ``default-tool`` to *-1* if you don't want any default tool, as it's setted by default.
+As well, you are able to set a default tool in the config. See **Valids Tools** to get a list of IDs. Set ``default-tool`` to *-1* if you don't want any default tool, as it's setted by default.
+Finally, you can prevent your players from rotating certain types of block by writing ``false`` in front of them in the config file.
 
 Please note that Rotate is in development, and though most features should work, there are and will be bugs. The code is open-source though, so feel free to check out and fork the code, improve it and fix bugs.
 
@@ -102,6 +103,7 @@ Gives access to the **/rotate setDefaultTool** command. This permission is by de
 
 # Changelog
 
++ **1.6** Added config settings to enable or disable individual blocks from being rotated.
 + **1.5** Added support for heads and new 1.4 and 1.5 blocks such as activator rails and trapped chests, and the new painting.
 Rotated blocks are now seen as broken and replaced blocks for compatibility with block recording plugins like SWatchdog.
 + **1.4** Added support for a default tool. Rotate can now save users' tools.

@@ -101,7 +101,7 @@ public class RotateCommand implements CommandExecutor {
 			case help:
 			default:
 				String[] helpMessage = {
-					ChatColor.RED + "Rotate v1.5 - By BongoMice",
+					ChatColor.RED + "Rotate v1.6 - By BongoMice",
 					ChatColor.RED + "Used to rotate those pesky Minecraft blocks.",
 					ChatColor.RED + "Supports stairs, heads, signs, dispensers, furnaces, slabs, pistons, rails, paintings, chests, pumpkins and logs.",
 					ChatColor.RED + "-> Use \"/rotate tool\" to enable Rotate on your current tool.",

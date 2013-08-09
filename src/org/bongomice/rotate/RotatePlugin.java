@@ -1,6 +1,10 @@
 package org.bongomice.rotate;
 
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.Map;
 import org.bukkit.ChatColor;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.plugin.Plugin;
@@ -87,7 +91,79 @@ public class RotatePlugin extends JavaPlugin {
 		} else {
 			console.sendMessage(ChatColor.LIGHT_PURPLE + "[Rotate] Default tool is: " + RotateUtil.getToolName(defaultToolID));
 		}
+                RotateUtil.valid_targets = loadRotatableBlocks();
 		console.sendMessage(ChatColor.LIGHT_PURPLE + "[Rotate] Config loaded.");
 
 	}
+        
+        public int[] loadRotatableBlocks() {
+                        
+            Map<String, Object> booleans = getConfig().getConfigurationSection("rotatable_blocks").getValues(true);
+            List<Integer> ls = new ArrayList();
+            
+            boolean bool = true;
+            
+            if (booleans.get("slab").equals(bool)) { 
+                ls.add(44);
+                ls.add(126);
+            }
+            if (booleans.get("rail").equals(bool)) {
+                ls.add(66);
+                ls.add(28);
+                ls.add(27);
+                ls.add(157);
+            }
+            if (booleans.get("piston").equals(bool)) { 
+                ls.add(33); ls.add(29);
+            }
+            if (booleans.get("stair").equals(bool)) { 
+                ls.add(109); ls.add(108); ls.add(67); ls.add(53); ls.add(128); ls.add(114);
+                ls.add(136); ls.add(135); ls.add(134); ls.add(156);
+            }
+            if (booleans.get("wood").equals(bool)) { 
+                ls.add(17); 
+            }
+            if (booleans.get("sign").equals(bool)) { 
+                ls.add(323);
+                ls.add(63); 
+            }
+            if (booleans.get("dispenser").equals(bool)) {
+                ls.add(23); 
+            }
+            if (booleans.get("dropper").equals(bool)) {
+                ls.add(158); 
+            }
+            if (booleans.get("furnace").equals(bool)) {
+                ls.add(61);
+                ls.add(62); 
+            }
+            if (booleans.get("enderchest").equals(bool)) {
+                ls.add(130); 
+            }
+            if (booleans.get("chest").equals(bool)) {
+                ls.add(54); 
+            }
+            if (booleans.get("trapped_chest").equals(bool)) {
+                ls.add(146); 
+            }
+            if (booleans.get("pumpkin").equals(bool)) {
+                ls.add(86); 
+            }
+            if (booleans.get("jack_o_lantern").equals(bool)) {
+                ls.add(91); 
+            }
+            if (booleans.get("head").equals(bool)) {
+                ls.add(144); 
+            }
+            RotateUtil.rotatable_painting = getConfig().getBoolean("rotatable_blocks.painting");
+            
+            int[] valid_targets = new int[ls.size()];
+            
+            for (int i = 0; i < ls.size(); i++) {
+                valid_targets[i] = ls.get(i);
+            }                   
+            
+            return valid_targets;
+        }
 }
+
