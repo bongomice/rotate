@@ -118,10 +118,10 @@ public class RotatePlugin extends JavaPlugin {
             }
             if (booleans.get("stair").equals(bool)) { 
                 ls.add(109); ls.add(108); ls.add(67); ls.add(53); ls.add(128); ls.add(114);
-                ls.add(136); ls.add(135); ls.add(134); ls.add(156);
+                ls.add(136); ls.add(135); ls.add(134); ls.add(156); ls.add(163); ls.add(164);
             }
             if (booleans.get("wood").equals(bool)) { 
-                ls.add(17); 
+                ls.add(17); ls.add(162); ls.add(170);
             }
             if (booleans.get("sign").equals(bool)) { 
                 ls.add(323);
@@ -155,6 +155,18 @@ public class RotatePlugin extends JavaPlugin {
             if (booleans.get("head").equals(bool)) {
                 ls.add(144); 
             }
+            /*
+            if (booleans.get("repeater").equals(bool)) {
+                
+            }
+            if (booleans.get("comparator").equals(bool)) {
+                
+            } */
+            ls.add(93);
+            ls.add(94);
+            ls.add(149);
+            ls.add(170);
+            
             RotateUtil.rotatable_painting = getConfig().getBoolean("rotatable_blocks.painting");
             
             int[] valid_targets = new int[ls.size()];

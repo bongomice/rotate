@@ -9,6 +9,8 @@ import org.bukkit.entity.Player;
 public class RotateUtil {
 
 	static final Map<String, Integer> user_tools = new HashMap<String, Integer>();
+        static final Map<String, Integer> players_tick = new HashMap<String, Integer>();
+        static final Map<String, Byte> player_last_data = new HashMap<String, Byte>();
 
 	static final int[] valid_tools = {
 		290, 291, 292, 293, 294,  // Hoes
@@ -117,6 +119,31 @@ public class RotateUtil {
 		}
 		RotatePlugin.rotatePlugin.saveConfig();
 	}
+        
+        public static boolean hasDoubleClicked(Player player) {
+            boolean hasDoubleClicked = false;
+            
+            try {
+                hasDoubleClicked = ((player.getTicksLived() - players_tick.get(player.getPlayerListName())) <= 5);
+            } catch (NullPointerException e) { RotateUtil.players_tick.put(player.getPlayerListName(), player.getTicksLived()); }
+            
+            RotateUtil.players_tick.put(player.getPlayerListName(), player.getTicksLived());
+            
+            return hasDoubleClicked;
+        }
+        
+        public static byte getPlayerLastData (Player player, byte actualData) {
+            byte lastData;
+            
+            try {
+                lastData = player_last_data.get(player.getPlayerListName());
+                
+            } catch (NullPointerException e) { 
+                lastData = actualData;
+            }
+            
+            return lastData;
+        }
 
 	public static boolean verify(Player player, Block block, int toolID){
 
